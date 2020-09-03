@@ -22,70 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace PostNL\Endpoints;
+namespace PostNL\Service;
 
 /**
- * Endpoints
- *
- * @author Jordi Jolink <mail@jordijolink.nl>
- * @since  27-5-2018
+ * Address Service
  */
-abstract class Endpoints
+class AddressService extends AbstractService
 {
     /**
-     *
-     * @var string
-     */
-    public $Barcode;
-
-    /**
-     *
-     * @var string
-     */
-    public $Confirm;
-
-    /**
-     *
-     * @var string
-     */
-    public $Labelling;
-
-    /**
-     *
-     * @var string
-     */
-    public $Timeframe;
-
-    /**
-     *
-     * @var string
-     */
-    public $Locations;
-
-    /**
-     *
-     * @var string
-     */
-    public $PostalCode;
-
-    /**
-     * @var string
-     */
-    public $ShippingStatus;
-
-	/**
-	 * @var string
-	 */
-    public $Address;
-
-    /**
-     * Endpoints constructor.
-     * Check if all endpoints are implemented.
-     *
+     * Check the address
+	 *
      * @throws \Exception
      */
-    public function __construct()
+    public function check(string $postalCode, string $city, string $street, string $houseNumber, string $addition): string
     {
-        // @todo: Loop all class properties and check if !empty()
+        $result = $this->get(
+            '/validate',
+            [
+                'PostalCode' => $postalCode,
+                'City' => $city,
+                'Street' => $street,
+                'HouseNumber' => $houseNumber,
+                'Addition' => $addition
+            ]
+        );
+
+        dd($result);
     }
 }
